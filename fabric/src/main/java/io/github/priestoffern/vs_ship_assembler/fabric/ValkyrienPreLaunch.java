@@ -1,4 +1,4 @@
-package io.github.techtastic.vs_addon_template.fabric;
+package io.github.priestoffern.vs_ship_assembler.fabric;
 
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
 

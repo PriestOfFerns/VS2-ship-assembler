@@ -1,15 +1,15 @@
-package io.github.techtastic.vs_addon_template.forge
+package io.github.priestoffern.vs_ship_assembler.forge
 
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
-import io.github.techtastic.vs_addon_template.VSAddonTemplateMod
-import io.github.techtastic.vs_addon_template.VSAddonTemplateMod.init
-import io.github.techtastic.vs_addon_template.VSAddonTemplateMod.initClient
+import io.github.priestoffern.vs_ship_assembler.VsShipAssemblerMod
+import io.github.priestoffern.vs_ship_assembler.VsShipAssemblerMod.init
+import io.github.priestoffern.vs_ship_assembler.VsShipAssemblerMod.initClient
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 
-@Mod(VSAddonTemplateMod.MOD_ID)
-class VSAddonTemplateModForge {
+@Mod(VsShipAssemblerMod.MOD_ID)
+class VsShipAssemblerModForge {
     init {
         MOD_BUS.addListener { event: FMLClientSetupEvent? ->
             clientSetup(

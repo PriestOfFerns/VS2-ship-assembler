@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "vs_addon_template",
+  "id": "vs_ship_assembler",
   "version": "${version}",
-  "name": "VS Addon Template",
+  "name": "VS Ship Assembler",
   "description": "An Addon Template for VS2",
   "authors": [
     "You!"
@@ -12,22 +12,22 @@
     "sources": "https://github.com/ValkyrienSkies/Eureka"
   },
   "license": "Apache-2.0",
-  "icon": "assets/vs_addon_template/icon.png",
+  "icon": "assets/vs_ship_assembler/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.techtastic.vs_addon_template.fabric.VSAddonTemplateModFabric"
+      "io.github.priestoffern.vs_ship_assembler.fabric.VsShipAssemblerModFabric"
     ],
     "client": [
-      "io.github.techtastic.vs_addon_template.fabric.VSAddonTemplateModFabric${'$'}Client"
+      "io.github.priestoffern.vs_ship_assembler.fabric.VsShipAssemblerModFabric${'$'}Client"
     ],
     "preLaunch": [
-      "io.github.techtastic.vs_addon_template.fabric.ValkyrienPreLaunch"
+      "io.github.priestoffern.vs_ship_assembler.fabric.ValkyrienPreLaunch"
     ]
   },
   "mixins": [
-    "vs_addon_template-common.mixins.json",
-    "vs_addon_template.mixins.json"
+    "vs_ship_assembler-common.mixins.json",
+    "vs_ship_assembler.mixins.json"
   ],
   "depends": {
     "minecraft": ">=1.18.2",
