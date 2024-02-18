@@ -1,0 +1,35 @@
+modLoader = "kotlinforforge"
+loaderVersion = "[3.12.0,)"
+issueTrackerURL = "https://github.com/ValkyrienSkies/Valkyrien-Skies-2/issues"
+license = "Apache-2.0"
+
+[[mods]]
+modId = "vs_addon_template"
+version = "${version}"
+displayName = "VS Addon Template"
+authors = ["TechTastic"]
+description = '''
+An Addon Template for VS2
+'''
+logoFile = "icon.png"
+
+[[dependencies.vs_addon_template]]
+modId = "forge"
+mandatory = true
+versionRange = "[40.1.69,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.vs_addon_template]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.18.2,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.vs_addon_template]]
+modId = "valkyrienskies"
+mandatory = true
+versionRange = "[${vs2_version},)"
+ordering = "AFTER"
+side = "BOTH"
