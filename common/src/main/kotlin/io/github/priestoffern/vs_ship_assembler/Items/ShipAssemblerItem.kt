@@ -79,7 +79,7 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
                         for (y in min(firstPosition!!.y, secondPosition!!.y)..max(firstPosition!!.y, secondPosition!!.y)) {
                             for (z in min(firstPosition!!.z, secondPosition!!.z)..max(firstPosition!!.z, secondPosition!!.z)) {
 
-                                if (level.getBlockState(BlockPos(x,y,z)).tags.anyMatch { it!=VsShipAssemblerTags.FORBIDDEN_ASSEMBLE })
+                                if (!level.getBlockState(BlockPos(x,y,z)).tags.anyMatch { it==VsShipAssemblerTags.FORBIDDEN_ASSEMBLE })
                                 add(BlockPos(x,y,z))
                             }
                         }
