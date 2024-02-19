@@ -19,7 +19,7 @@ object VsShipAssemblerItems {
     ) {ItemStack(VsShipAssemblerItems.SHIP_ASSEMBLER.get())}
 
 
-    var SHIP_ASSEMBLER: RegistrySupplier<Item> = ITEMS.register("status_goggles") { ShipAssemblerItem(Item.Properties().tab(
+    var SHIP_ASSEMBLER: RegistrySupplier<Item> = ITEMS.register("ship_assembler") { ShipAssemblerItem(Item.Properties().tab(
         TAB).stacksTo(1)) }
     fun register() {
         ITEMS.register()

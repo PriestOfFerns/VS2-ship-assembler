@@ -5,8 +5,6 @@ object VsShipAssemblerMod {
 
     @JvmStatic
     fun init() {
-
-
         VsShipAssemblerItems.register()
     }
 
