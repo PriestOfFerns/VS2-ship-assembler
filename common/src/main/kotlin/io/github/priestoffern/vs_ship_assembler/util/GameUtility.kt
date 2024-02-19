@@ -51,12 +51,7 @@ object GameUtility {
 
     fun triggerUpdate(level: Level, pos: BlockPos?) {
         val chunk = level.getChunkAt(pos)
-        level.setBlockAndUpdate(pos,level.getBlockState(pos)) //markAndNotifyBlock(pos, chunk, level.getBlockState(pos), level.getBlockState(pos), 3, 512)
-    }
-
-    fun triggerClientSync(level: Level, pos: BlockPos?) {
-        val state = level.getBlockState(pos)
-        level.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL)
+        level.sendBlockUpdated (pos, level.getBlockState(pos), level.getBlockState(pos), 3) //markAndNotifyBlock(pos, chunk, level.getBlockState(pos), level.getBlockState(pos), 3, 512)
     }
 
 
