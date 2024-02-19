@@ -64,7 +64,7 @@ class ContraptionPosition {
     constructor(contraption: ServerShip, useGeometricCenter: Boolean) : this(contraption) {
         if (useGeometricCenter) {
             val shipBounds = contraption.shipAABB
-            val shipCoordCenter: Vec3d = MathUtility.getMiddle(
+            val shipCoordCenter: Vec3d = GeneralUtility.getMiddle(
                 Vec3d(shipBounds!!.minX().toDouble(), shipBounds.minY().toDouble(), shipBounds.minZ().toDouble()), Vec3d(
                     shipBounds!!.maxX().toDouble(), shipBounds.maxY().toDouble(), shipBounds.maxZ().toDouble()
                 )
@@ -89,7 +89,7 @@ class ContraptionPosition {
     fun toTeleport(contraption: ServerShip, useGeometricCenter: Boolean): ShipTeleportData {
         if (useGeometricCenter) {
             val shipBounds = contraption.shipAABB
-            val shipCoordCenter: Vec3d = MathUtility.getMiddle(
+            val shipCoordCenter: Vec3d = GeneralUtility.getMiddle(
                 Vec3d(shipBounds!!.minX().toDouble(), shipBounds.minY().toDouble(), shipBounds.minZ().toDouble()), Vec3d(
                     shipBounds!!.maxX().toDouble(), shipBounds.maxY().toDouble(), shipBounds.maxZ().toDouble()
                 )

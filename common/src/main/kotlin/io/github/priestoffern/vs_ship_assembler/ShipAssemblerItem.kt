@@ -1,6 +1,6 @@
 package io.github.priestoffern.vs_ship_assembler
 
-import io.github.priestoffern.vs_ship_assembler.util.PhysicHandlerCapability
+import io.github.priestoffern.vs_ship_assembler.util.PhysicUtility
 import net.minecraft.Util
 import net.minecraft.client.resources.sounds.Sound
 import net.minecraft.core.BlockPos
@@ -38,7 +38,7 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
             )
         )
         //player.sendMessage(TextComponent(" ${clipResult.blockPos}"), Util.NIL_UUID)
-        player.playSound(SoundType.AZALEA.hitSound, 1F, 1F)
+        player.playSound(SoundType.AMETHYST_CLUSTER.placeSound, 1F, 1F)
 
         val pos = clipResult.blockPos
 
@@ -83,10 +83,7 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
                     }
                 }
 
-
-
-
-                PhysicHandlerCapability.assembleToContraption(level,set,true,1.0)
+                PhysicUtility.assembleToContraption(level,set,true,1.0)
                 player.sendMessage(TextComponent("Assembled!"), Util.NIL_UUID)
 
                 firstPosition = null
