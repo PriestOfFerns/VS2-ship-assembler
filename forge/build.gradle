@@ -90,7 +90,7 @@ dependencies {
 
     // Kotlin for Forge
     implementation "thedarkcolour:kotlinforforge:$forge_kotlin_version"
-    api "com.github.M-Marvin:LIBRARY-UnifiedVectors:$univec_version"
+    implementation "com.github.M-Marvin:LIBRARY-UnifiedVectors:$univec_version"
 }
 
 processResources {

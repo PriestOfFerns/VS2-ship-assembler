@@ -51,7 +51,7 @@ dependencies {
     compileOnly("org.valkyrienskies.core:util:${rootProject.vs_core_version}")
     compileOnly("org.valkyrienskies.core:impl:${rootProject.vs_core_version}")
 
-    api "com.github.M-Marvin:LIBRARY-UnifiedVectors:$univec_version"
+    implementation  "com.github.M-Marvin:LIBRARY-UnifiedVectors:$univec_version"
 
 
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.10"
