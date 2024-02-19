@@ -1,14 +1,5 @@
-**So, you want to create a VS2 addon?**
+# VS2 Ship assembler
 
-__Well, here is the template for you!__
+A simple mod meant to provide a better way to assemble VS2 ships.
 
-This template is a gutted version of 1.18.2 [Eureka](https://github.com/ValkyrienSkies/Eureka)
-so some stuff may be left over that you wont necessarily make use of such as publishing to VS Maven
-
-__This template's dependencies include:__
-- Architectury API (*its easier than the weird custom services Eureka uses*)
-- Valkyrien Skies 2
-- VS Core
-- Kotlin for Forge
-
-![vs_addon_template_logo](https://github.com/TechTastic/VS-Addon-Template/assets/74630543/de76337a-387d-44a4-aac0-f42f97bae499)
+Currently VS2's relocation util, which is used by most addons for assembly causes dupe bugs and issues with blocks like redstone. This mod solves that, using a jerry rigged and ported to kotlin architechtury versuib if [M-Marvin's custom assembly code ](https://github.com/M-Marvin/MCMOD-Industria). Hats off to him, because all I did was poorly throw together a mod using it.
