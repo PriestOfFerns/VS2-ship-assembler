@@ -52,6 +52,7 @@ object GameUtility {
     fun triggerUpdate(level: Level, pos: BlockPos?) {
         val chunk = level.getChunkAt(pos)
         level.sendBlockUpdated (pos, level.getBlockState(pos), level.getBlockState(pos), 3) //markAndNotifyBlock(pos, chunk, level.getBlockState(pos), level.getBlockState(pos), 3, 512)
+        level.updateNeighborsAt(pos,level.getBlockState(pos).block)
     }
 
 
