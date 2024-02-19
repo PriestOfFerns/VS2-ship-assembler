@@ -1,5 +1,6 @@
-package io.github.priestoffern.vs_ship_assembler
+package io.github.priestoffern.vs_ship_assembler.Items
 
+import io.github.priestoffern.vs_ship_assembler.VsShipAssemblerTags
 import io.github.priestoffern.vs_ship_assembler.util.PhysicUtility
 import net.minecraft.Util
 import net.minecraft.client.resources.sounds.Sound
@@ -77,6 +78,8 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
                     for (x in min(firstPosition!!.x, secondPosition!!.x)..max(firstPosition!!.x, secondPosition!!.x)) {
                         for (y in min(firstPosition!!.y, secondPosition!!.y)..max(firstPosition!!.y, secondPosition!!.y)) {
                             for (z in min(firstPosition!!.z, secondPosition!!.z)..max(firstPosition!!.z, secondPosition!!.z)) {
+
+                                if (level.getBlockState(BlockPos(x,y,z)).tags.anyMatch { it!=VsShipAssemblerTags.FORBIDDEN_ASSEMBLE })
                                 add(BlockPos(x,y,z))
                             }
                         }

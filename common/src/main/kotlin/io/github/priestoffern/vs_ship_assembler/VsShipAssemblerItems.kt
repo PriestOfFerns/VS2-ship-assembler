@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
+import io.github.priestoffern.vs_ship_assembler.Items.ShipAssemblerItem
 
 object VsShipAssemblerItems {
     val ITEMS = DeferredRegister.create(VsShipAssemblerMod.MOD_ID, Registry.ITEM_REGISTRY)
@@ -16,11 +17,12 @@ object VsShipAssemblerItems {
             VsShipAssemblerMod.MOD_ID,
             "vs_ship_assembler_tab"
         )
-    ) {ItemStack(VsShipAssemblerItems.SHIP_ASSEMBLER.get())}
+    ) {ItemStack(SHIP_ASSEMBLER.get())}
 
 
     var SHIP_ASSEMBLER: RegistrySupplier<Item> = ITEMS.register("ship_assembler") { ShipAssemblerItem(Item.Properties().tab(
-        TAB).stacksTo(1)) }
+        TAB
+    ).stacksTo(1)) }
     fun register() {
         ITEMS.register()
     }
