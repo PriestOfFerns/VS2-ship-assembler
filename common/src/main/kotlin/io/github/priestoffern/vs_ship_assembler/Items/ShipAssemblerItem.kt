@@ -86,8 +86,13 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
                     }
                 }
 
-                PhysicUtility.assembleToContraption(level,set,true,1.0)
-                player.sendMessage(TextComponent("Assembled!"), Util.NIL_UUID)
+                if (set.size>0) {
+                    PhysicUtility.assembleToContraption(level,set,true,1.0)
+                    player.sendMessage(TextComponent("Assembled!"), Util.NIL_UUID)
+                } else {
+                    player.sendMessage(TextComponent("Failed to Assemble: Empty ship"), Util.NIL_UUID)
+                }
+
 
                 firstPosition = null
                 secondPosition = null
