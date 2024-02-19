@@ -122,36 +122,7 @@ object GeneralUtility {
         )) / 2.0
         return Vec3d(middleX, middleY, middleZ)
     }
-
-
-
-
-
-
-
-
-
-    fun rotatePoint(point: Vec3d, axis: Vec3d?, angle: Float, degrees: Boolean): Vec3d {
-        var angle = angle
-        if (degrees) angle = Math.toRadians(angle.toDouble()).toFloat()
-        val quat = Quaterniond(axis, angle.toDouble())
-        return point.transform(quat)
-    }
-
-    fun rotatePoint(point: Vec3f, axis: Vec3f?, angle: Float, degrees: Boolean): Vec3f {
-        var angle = angle
-        if (degrees) angle = Math.toRadians(angle.toDouble()).toFloat()
-        val quat = Quaternionf(axis, angle)
-        return point.transform(quat)
-    }
-
-    fun rotatePoint(point: Vec3i?, axis: Vec3f?, angle: Float, degrees: Boolean): Vec3i {
-        var angle = angle
-        if (degrees) angle = Math.toRadians(angle.toDouble()).toFloat()
-        val quat = Quaternionf(axis, angle)
-        val transform = Vec3f(point).transform(quat)
-        return Vec3i(Math.round(transform.x), Math.round(transform.y), Math.round(transform.z))
-    }
+    
 
 
 
