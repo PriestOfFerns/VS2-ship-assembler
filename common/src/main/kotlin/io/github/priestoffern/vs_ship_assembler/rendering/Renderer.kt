@@ -12,7 +12,8 @@ import org.valkyrienskies.mod.common.shipObjectWorld
 fun renderData(poseStack: PoseStack, camera: Camera) {
 
     for (data in Renderer.toRender) {
-        data.renderData(poseStack, camera)
+        if (data!=null) data.renderData(poseStack, camera)
+
     }
 }
 
