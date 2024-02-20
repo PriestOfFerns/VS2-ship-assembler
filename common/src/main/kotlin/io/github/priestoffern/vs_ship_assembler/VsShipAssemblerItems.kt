@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
-import io.github.priestoffern.vs_ship_assembler.Items.ShipAssemblerItem
+import io.github.priestoffern.vs_ship_assembler.items.ShipAssemblerItem
 
 object VsShipAssemblerItems {
     val ITEMS = DeferredRegister.create(VsShipAssemblerMod.MOD_ID, Registry.ITEM_REGISTRY)

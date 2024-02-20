@@ -3,6 +3,7 @@
   "package": "io.github.priestoffern.vs_ship_assembler.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "GameRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
