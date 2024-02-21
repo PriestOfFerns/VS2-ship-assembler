@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iW",
+    " O"
+  ],
+  "key": {
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "W": {
+      "item": "vs_clockwork:wanderlite_cube"
+    },
+    "O": {
+      "item": "create:andesite_casing"
+    }
+  },
+  "result": {}
+}
