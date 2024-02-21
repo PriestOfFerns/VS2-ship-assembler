@@ -10,17 +10,17 @@ import org.valkyrienskies.mod.common.shipObjectWorld
 
 
 fun renderData(poseStack: PoseStack, camera: Camera) {
-
     for (data in Renderer.toRender) {
-        if (data!=null) data.renderData(poseStack, camera)
+        data.renderData(poseStack, camera)
 
     }
+    Renderer.toRender.removeAll(Renderer.toRemove)
 }
 
 object Renderer {
     var CurrentId:Long = 0;
     val toRender = mutableListOf<RenderingData>()
-
+    val toRemove = mutableListOf<RenderingData>()
     fun addRender(renderData: RenderingData): RenderingData {
         renderData.Id = CurrentId;
         CurrentId++
@@ -30,7 +30,8 @@ object Renderer {
     }
 
     fun removeRender(renderData: RenderingData) {
-        toRender.remove(renderData);
+        toRemove.add(renderData);
+
     }
 }
 
