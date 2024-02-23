@@ -12,7 +12,7 @@ import org.valkyrienskies.mod.common.shipObjectWorld
 
 fun renderData(poseStack: PoseStack, camera: Camera) {
 
-    val currentlyRendering = Renderer.toRender // Have to do this to prevent ConcurrentModificationException
+    val currentlyRendering = Renderer.toRender.toMutableList() // Have to do this to prevent ConcurrentModificationException
     for (data in currentlyRendering) {
 
         data.renderData(poseStack, camera)
