@@ -21,11 +21,8 @@ import org.valkyrienskies.mod.common.shipObjectWorld
 object PhysicUtility {
     fun toContraptionPos(contraption: ShipTransform, pos: Vec3d): Vec3d {
         val worldToShip = contraption.worldToShip
-        if (worldToShip != null) {
-            val transformPosition = worldToShip.transformPosition(pos.writeTo(Vector3d()))
-            return Vec3d.fromVec(transformPosition)
-        }
-        return Vec3d(0.0, 0.0, 0.0)
+        val transformPosition = worldToShip.transformPosition(pos.writeTo(Vector3d()))
+        return Vec3d.fromVec(transformPosition)
     }
 
     fun toContraptionBlockPos(contraption: ShipTransform, pos: Vec3d): BlockPos {
@@ -39,11 +36,8 @@ object PhysicUtility {
 
     fun toWorldPos(contraption: ShipTransform, pos: Vec3d): Vec3d {
         val shipToWorld = contraption.shipToWorld
-        if (shipToWorld != null) {
-            val transformedPosition = shipToWorld.transformPosition(pos.writeTo(Vector3d()))
-            return Vec3d.fromVec(transformedPosition)
-        }
-        return Vec3d(0.0, 0.0, 0.0)
+        val transformedPosition = shipToWorld.transformPosition(pos.writeTo(Vector3d()))
+        return Vec3d.fromVec(transformedPosition)
     }
 
     fun teleportContraption(
@@ -83,9 +77,9 @@ object PhysicUtility {
         // Stone for safety reasons
         val pos2: BlockPos = PhysicUtility.toContraptionBlockPos(
             newContraption.transform,
-            GeneralUtility.toBlockPos(contraptionPosition.GetPosition())
+            toBlockPos(contraptionPosition.GetPosition())
         )
-        level!!.setBlock(pos2, Blocks.STONE.defaultBlockState(), 3)
+        level.setBlock(pos2, Blocks.STONE.defaultBlockState(), 3)
 
         // Teleport ship to final destination
         (level as ServerLevel).server.shipObjectWorld
@@ -123,10 +117,10 @@ object PhysicUtility {
         // Copy blocks and check if the center block got replaced (is default a stone block)
         var centerBlockReplaced = false
         for (itPos in blocks) {
-            val relative: BlockPos = itPos!!.subtract(GeneralUtility.toBlockPos(contraptionWorldPos))
+            val relative: BlockPos = itPos.subtract(toBlockPos(contraptionWorldPos))
             val shipPos: BlockPos = contraptionBlockPos.offset(relative)
             GeneralUtility.copyBlock(level, itPos, shipPos)
-            if (relative.equals(BlockPos.ZERO)) centerBlockReplaced = true
+            if (relative == BlockPos.ZERO) centerBlockReplaced = true
         }
 
         // If center block got not replaced, remove the stone block
@@ -137,24 +131,20 @@ object PhysicUtility {
         // Remove original blocks
         if (removeOriginal) {
             for (itPos in blocks) {
-                if (itPos != null) {
-                    GeneralUtility.removeBlock(level, itPos)
-                }
+                GeneralUtility.removeBlock(level, itPos)
             }
         }
 
         // Trigger updates on both contraptions
         for (itPos in blocks) {
-            val relative: BlockPos = itPos!!.subtract(GeneralUtility.toBlockPos(contraptionWorldPos))
+            val relative: BlockPos = itPos.subtract(toBlockPos(contraptionWorldPos))
             val shipPos: BlockPos = contraptionBlockPos.offset(relative)
             GeneralUtility.triggerUpdate(level, itPos)
             GeneralUtility.triggerUpdate(level, shipPos)
         }
 
         // Set the final position gain, since the contraption moves slightly if blocks are added
-        if (contraption != null) {
-            teleportContraption(level as ServerLevel, contraption as ServerShip, contraptionPosition, true)
-        }
+        teleportContraption(level as ServerLevel, contraption as ServerShip, contraptionPosition, true)
         return true
     }
 
