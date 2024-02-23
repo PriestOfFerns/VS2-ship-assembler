@@ -11,23 +11,20 @@ import org.valkyrienskies.mod.common.shipObjectWorld
 
 
 fun renderData(poseStack: PoseStack, camera: Camera) {
-    if (Renderer.rendering) return // Sometimes renderData() seems to go off before removeAll() is done, causing a crash. No clue why that happens though?
-    Renderer.rendering = true;
-    for (data in Renderer.toRender) {
+
+    val currentlyRendering = Renderer.toRender // Have to do this to prevent ConcurrentModificationException
+    for (data in currentlyRendering) {
 
         data.renderData(poseStack, camera)
 
     }
-    Renderer.toRender.removeAll(Renderer.toRemove)
-    Renderer.rendering = false;
+
 }
 
 object Renderer {
     var CurrentId:Long = 0;
     val toRender = mutableListOf<RenderingData>()
-    val toRemove = mutableListOf<RenderingData>()
 
-    var rendering = false;
     fun addRender(renderData: RenderingData): RenderingData {
         renderData.Id = CurrentId;
         CurrentId++
@@ -37,7 +34,7 @@ object Renderer {
     }
 
     fun removeRender(renderData: RenderingData) {
-        toRemove.add(renderData);
+        toRender.remove(renderData);
 
     }
 }
