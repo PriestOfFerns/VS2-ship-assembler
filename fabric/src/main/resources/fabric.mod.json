@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "id": "vs_ship_assembler",
   "version": "${version}",
-  "name": "VS Ship Assembler",
-  "description": "An Addon Template for VS2",
+  "name": "Better VS Ship Assembler",
+  "description": "A mod that adds a better ship assembler for VS2",
   "authors": [
-    "You!"
+    "PriestOfFern"
   ],
   "contact": {
     "homepage": "https://valkyrienskies.org/",

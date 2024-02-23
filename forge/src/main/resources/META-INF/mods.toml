@@ -6,10 +6,10 @@ license = "Apache-2.0"
 [[mods]]
 modId = "vs_ship_assembler"
 version = "${version}"
-displayName = "VS Addon Template"
+displayName = "Better VS Ship Assembler"
 authors = ["PriestOfFern"]
 description = '''
-An Addon Template for VS2
+A Mod that adds a better Ship assembler for VS2
 '''
 logoFile = "icon.png"
 
