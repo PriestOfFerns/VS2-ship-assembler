@@ -6,7 +6,7 @@ import io.github.priestoffern.vs_ship_assembler.rendering.Renderer
 import io.github.priestoffern.vs_ship_assembler.rendering.RenderingData
 import io.github.priestoffern.vs_ship_assembler.rendering.SelectionZoneRenderer
 import io.github.priestoffern.vs_ship_assembler.util.PhysicUtility
-import net.fabricmc.loader.impl.lib.sat4j.core.Vec
+import net.minecraft.ChatFormatting
 import net.minecraft.Util
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.TextComponent
@@ -26,7 +26,8 @@ import org.valkyrienskies.mod.common.getShipObjectManagingPos
 import org.valkyrienskies.mod.common.util.toJOML
 import org.valkyrienskies.mod.common.util.toMinecraft
 import java.awt.Color
-import java.lang.Math.*
+import java.lang.Math.max
+import java.lang.Math.min
 
 class ShipAssemblerItem(properties: Properties): Item(properties) {
 
@@ -34,7 +35,9 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
     var secondPosition: BlockPos? = null
     var SelectionZone: RenderingData? = null
 
+
     override fun use(level: Level, player: Player, interactionHand: InteractionHand): InteractionResultHolder<ItemStack> {
+
         val clipResult = level.clip(
             ClipContext(
                 (Vector3d(player.eyePosition.toJOML()).toMinecraft()),
@@ -68,14 +71,14 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
                 secondPosition = null
                 if (SelectionZone!=null) Renderer.removeRender(SelectionZone!!)
                 SelectionZone = null;
-                player.sendMessage(TextComponent("Selection reset"), Util.NIL_UUID)
+                player.sendMessage(TextComponent("Selection reset").withStyle(ChatFormatting.BOLD), Util.NIL_UUID)
             } else if (firstPosition == null) {
                 val res = raycast(level, player, ClipContext.Fluid.NONE)
                 if (res!=null && level.getShipObjectManagingPos(res.blockPos) == null ) {
                     firstPosition = res.blockPos
-                    player.sendMessage(TextComponent("First pos selected"), Util.NIL_UUID)
+                    player.sendMessage(TextComponent("First pos selected").withStyle(ChatFormatting.BOLD), Util.NIL_UUID)
                 } else {
-                    player.sendMessage(TextComponent("Selected position is invalid"), Util.NIL_UUID)
+                    player.sendMessage(TextComponent("Selected position is invalid").withStyle(ChatFormatting.RED), Util.NIL_UUID)
                 }
             } else if (secondPosition == null) {
 
@@ -83,7 +86,7 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
                 val res = raycast(level, player, ClipContext.Fluid.NONE)
                 if (res!=null && level.getShipObjectManagingPos(res.blockPos) == null ) {
                     secondPosition = res.blockPos
-                    player.sendMessage(TextComponent("Second pos selected"), Util.NIL_UUID)
+                    player.sendMessage(TextComponent("Second pos selected").withStyle(ChatFormatting.BOLD), Util.NIL_UUID)
 
                     if (SelectionZone!=null) Renderer.removeRender(SelectionZone!!)
                     SelectionZone = null;
@@ -92,7 +95,7 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
                         firstPosition!!.y.toDouble(), firstPosition!!.z.toDouble()),Vec3d(res.blockPos.x.toDouble(),res.blockPos.y.toDouble(),res.blockPos.z.toDouble()), Color.GREEN);
                     SelectionZone = Renderer.addRender(SZ)
                 } else {
-                    player.sendMessage(TextComponent("Selected position is invalid"), Util.NIL_UUID)
+                    player.sendMessage(TextComponent("Selected position is invalid").withStyle(ChatFormatting.RED), Util.NIL_UUID)
                 }
 
             } else {
@@ -110,9 +113,9 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
 
                 if (set.size>0) {
                     PhysicUtility.assembleToContraption(level,set,true,1.0)
-                    player.sendMessage(TextComponent("Assembled!"), Util.NIL_UUID)
+                    player.sendMessage(TextComponent("Assembled!").withStyle(ChatFormatting.BOLD), Util.NIL_UUID)
                 } else {
-                    player.sendMessage(TextComponent("Failed to Assemble: Empty ship"), Util.NIL_UUID)
+                    player.sendMessage(TextComponent("Failed to Assemble: Empty ship").withStyle(ChatFormatting.RED), Util.NIL_UUID)
                 }
 
                 if (SelectionZone!=null) Renderer.removeRender(SelectionZone!!)
