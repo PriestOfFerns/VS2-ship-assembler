@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "iW",
-    " O"
+    " i"
   ],
   "key": {
     "i": {
@@ -10,10 +10,9 @@
     },
     "W": {
       "item": "minecraft:ender_pearl"
-    },
-    "O": {
-      "item": "minecraft:iron_ingot"
     }
   },
-  "result": {}
+  "result": {
+    "item": "vs_ship_assembler:ship_assembler"
+  }
 }
