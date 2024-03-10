@@ -22,6 +22,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.SoundType
 import net.minecraft.world.phys.BlockHitResult
 import org.joml.Vector3d
+import org.valkyrienskies.core.impl.hooks.VSEvents
 import org.valkyrienskies.mod.common.getShipObjectManagingPos
 import org.valkyrienskies.mod.common.util.toJOML
 import org.valkyrienskies.mod.common.util.toMinecraft
@@ -37,7 +38,7 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
 
 
     override fun use(level: Level, player: Player, interactionHand: InteractionHand): InteractionResultHolder<ItemStack> {
-
+        VSEvents
         val clipResult = level.clip(
             ClipContext(
                 (Vector3d(player.eyePosition.toJOML()).toMinecraft()),
