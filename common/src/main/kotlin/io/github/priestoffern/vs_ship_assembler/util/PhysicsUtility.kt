@@ -147,8 +147,7 @@ object PhysicUtility {
         for (itPos in blocks) {
             val relative: BlockPos = itPos.subtract(toBlockPos(contraptionWorldPos))
             val shipPos: BlockPos = contraptionBlockPos.offset(relative)
-            GeneralUtility.triggerUpdate(level, itPos)
-            GeneralUtility.triggerUpdate(level, shipPos)
+            GeneralUtility.updateBlock(level,itPos,shipPos,level.getBlockState(shipPos))
         }
 
         // Set the final position gain, since the contraption moves slightly if blocks are added

@@ -1,9 +1,6 @@
 package io.github.priestoffern.vs_ship_assembler.util
 
-import de.m_marvin.unimat.impl.Quaterniond
-import de.m_marvin.unimat.impl.Quaternionf
 import de.m_marvin.univec.impl.Vec3d
-import de.m_marvin.univec.impl.Vec3f
 import de.m_marvin.univec.impl.Vec3i
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -16,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.chunk.LevelChunk
 import net.minecraft.world.ticks.ScheduledTick
 
-
+private val AIR = Blocks.AIR.defaultBlockState()
 object GeneralUtility {
 
     fun setBlock(level: Level, pos: BlockPos, state: BlockState?) {
@@ -51,10 +48,32 @@ object GeneralUtility {
         }
     }
 
-    fun triggerUpdate(level: Level, pos: BlockPos?) {
-        val chunk = level.getChunkAt(pos)
-        level.sendBlockUpdated (pos, level.getBlockState(pos), level.getBlockState(pos), 3) //markAndNotifyBlock(pos, chunk, level.getBlockState(pos), level.getBlockState(pos), 3, 512)
-        level.updateNeighborsAt(pos,level.getBlockState(pos).block)
+    fun updateBlock(level: Level, fromPos: BlockPos, toPos: BlockPos, toState: BlockState) {
+
+        // 75 = flag 1 (block update) & flag 2 (send to clients) + flag 8 (force rerenders)
+        val flags = 11
+
+        //updateNeighbourShapes recurses through nearby blocks, recursionLeft is the limit
+        val recursionLeft = 511
+
+        level.setBlocksDirty(fromPos, toState, AIR)
+        level.sendBlockUpdated(fromPos, toState, AIR, flags)
+        level.blockUpdated(fromPos, AIR.block)
+        // This handles the update for neighboring blocks in worldspace
+        AIR.updateIndirectNeighbourShapes(level, fromPos, flags, recursionLeft - 1)
+        AIR.updateNeighbourShapes(level, fromPos, flags, recursionLeft)
+        AIR.updateIndirectNeighbourShapes(level, fromPos, flags, recursionLeft)
+        //This updates lighting for blocks in worldspace
+        level.chunkSource.lightEngine.checkBlock(fromPos)
+
+        level.setBlocksDirty(toPos, AIR, toState)
+        level.sendBlockUpdated(toPos, AIR, toState, flags)
+        level.blockUpdated(toPos, toState.block)
+        if (!level.isClientSide && toState.hasAnalogOutputSignal()) {
+            level.updateNeighbourForOutputSignal(toPos, toState.block)
+        }
+        //This updates lighting for blocks in shipspace
+        level.chunkSource.lightEngine.checkBlock(toPos)
     }
     fun toBlockPos(x: Double, y: Double, z: Double): BlockPos {
         return BlockPos(Mth.floor(x), Math.floor(y).toInt(), Math.floor(z).toInt())
