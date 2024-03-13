@@ -3,6 +3,7 @@ package io.github.priestoffern.vs_ship_assembler.util
 
 import de.m_marvin.unimat.impl.Quaterniond
 import de.m_marvin.univec.impl.Vec3d
+import io.github.priestoffern.vs_ship_assembler.VsShipAssemblerTags
 import io.github.priestoffern.vs_ship_assembler.util.GeneralUtility.toBlockPos
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
@@ -54,6 +55,9 @@ object PhysicUtility {
     }
 
     fun isSolidContraptionBlock(state: BlockState?): Boolean {
+        if (state != null) {
+            return !state.tags.anyMatch { it== VsShipAssemblerTags.FORBIDDEN_ASSEMBLE }
+        }
         return true
     }
 
@@ -117,10 +121,12 @@ object PhysicUtility {
         // Copy blocks and check if the center block got replaced (is default a stone block)
         var centerBlockReplaced = false
         for (itPos in blocks) {
-            val relative: BlockPos = itPos.subtract(toBlockPos(contraptionWorldPos))
-            val shipPos: BlockPos = contraptionBlockPos.offset(relative)
-            GeneralUtility.copyBlock(level, itPos, shipPos)
-            if (relative == BlockPos.ZERO) centerBlockReplaced = true
+            if (isSolidContraptionBlock(level.getBlockState(itPos))) {
+                val relative: BlockPos = itPos.subtract(toBlockPos(contraptionWorldPos))
+                val shipPos: BlockPos = contraptionBlockPos.offset(relative)
+                GeneralUtility.copyBlock(level, itPos, shipPos)
+                if (relative == BlockPos.ZERO) centerBlockReplaced = true
+            }
         }
 
         // If center block got not replaced, remove the stone block
@@ -131,7 +137,9 @@ object PhysicUtility {
         // Remove original blocks
         if (removeOriginal) {
             for (itPos in blocks) {
-                GeneralUtility.removeBlock(level, itPos)
+                if (isSolidContraptionBlock(level.getBlockState(itPos))) {
+                    GeneralUtility.removeBlock(level, itPos)
+                }
             }
         }
 

@@ -1,7 +1,6 @@
 package io.github.priestoffern.vs_ship_assembler.items
 
 import de.m_marvin.univec.impl.Vec3d
-import io.github.priestoffern.vs_ship_assembler.VsShipAssemblerTags
 import io.github.priestoffern.vs_ship_assembler.rendering.Renderer
 import io.github.priestoffern.vs_ship_assembler.rendering.RenderingData
 import io.github.priestoffern.vs_ship_assembler.rendering.SelectionZoneRenderer
@@ -105,18 +104,17 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
                         for (y in min(firstPosition!!.y, secondPosition!!.y)..max(firstPosition!!.y, secondPosition!!.y)) {
                             for (z in min(firstPosition!!.z, secondPosition!!.z)..max(firstPosition!!.z, secondPosition!!.z)) {
 
-                                if (!level.getBlockState(BlockPos(x,y,z)).tags.anyMatch { it==VsShipAssemblerTags.FORBIDDEN_ASSEMBLE })
+                                //if (!level.getBlockState(BlockPos(x,y,z)).tags.anyMatch { it==VsShipAssemblerTags.FORBIDDEN_ASSEMBLE })
                                 add(BlockPos(x,y,z))
                             }
                         }
                     }
                 }
 
-                if (set.size>0) {
-                    PhysicUtility.assembleToContraption(level,set,true,1.0)
+                if (PhysicUtility.assembleToContraption(level,set,true,1.0)) {
                     player.sendMessage(TextComponent("Assembled!").withStyle(ChatFormatting.BOLD), Util.NIL_UUID)
                 } else {
-                    player.sendMessage(TextComponent("Failed to Assemble: Empty ship").withStyle(ChatFormatting.RED), Util.NIL_UUID)
+                    player.sendMessage(TextComponent("Failed to Assemble").withStyle(ChatFormatting.RED), Util.NIL_UUID)
                 }
 
                 if (SelectionZone!=null) Renderer.removeRender(SelectionZone!!)
