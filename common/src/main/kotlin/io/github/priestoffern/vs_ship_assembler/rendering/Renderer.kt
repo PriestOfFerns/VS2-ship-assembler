@@ -16,7 +16,7 @@ fun renderData(poseStack: PoseStack, camera: Camera) {
 
 object Renderer {
     var CurrentId:Long = 0;
-    val toRender = mutableListOf<RenderingData>()
+    var toRender = mutableListOf<RenderingData>()
 
     fun addRender(renderData: RenderingData): RenderingData {
         renderData.Id = CurrentId;
@@ -29,11 +29,19 @@ object Renderer {
     fun removeRender(renderData: RenderingData) {
         toRender.remove(renderData);
 
+
+    }
+
+    fun removeRenderOfType(renderData: RenderingData) {
+        val clone = toRender.toMutableList(); // This is an awful way to do this, but I can't think of a different way
+        clone.removeIf { it.type==renderData.type }
+        toRender=clone;
     }
 }
 
 
 interface RenderingData {
     var Id: Long;
+    var type: String;
     fun renderData(poseStack: PoseStack, camera: Camera)
 }

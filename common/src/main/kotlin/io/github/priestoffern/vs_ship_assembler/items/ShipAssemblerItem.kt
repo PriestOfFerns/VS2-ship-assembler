@@ -69,7 +69,7 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
             if (player.isShiftKeyDown and (level.getBlockState(pos).isAir)) {
                 firstPosition = null
                 secondPosition = null
-                if (SelectionZone!=null) Renderer.removeRender(SelectionZone!!)
+                if (SelectionZone!=null) Renderer.removeRenderOfType(SelectionZone!!)
                 SelectionZone = null;
                 player.sendMessage(TextComponent("Selection reset").withStyle(ChatFormatting.BOLD), Util.NIL_UUID)
             } else if (firstPosition == null) {
@@ -88,7 +88,7 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
                     secondPosition = res.blockPos
                     player.sendMessage(TextComponent("Second pos selected").withStyle(ChatFormatting.BOLD), Util.NIL_UUID)
 
-                    if (SelectionZone!=null) Renderer.removeRender(SelectionZone!!)
+                    if (SelectionZone!=null) Renderer.removeRenderOfType(SelectionZone!!)
                     SelectionZone = null;
 
                     val SZ = SelectionZoneRenderer(Vec3d(firstPosition!!.x.toDouble(),
@@ -117,7 +117,7 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
                     player.sendMessage(TextComponent("Failed to Assemble").withStyle(ChatFormatting.RED), Util.NIL_UUID)
                 }
 
-                if (SelectionZone!=null) Renderer.removeRender(SelectionZone!!)
+                if (SelectionZone!=null) Renderer.removeRenderOfType(SelectionZone!!)
                 SelectionZone = null;
                 firstPosition = null
                 secondPosition = null
@@ -131,7 +131,7 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
         super.inventoryTick(stack, level, entity, slotId, isSelected)
 
         if (isSelected && secondPosition == null) {
-            if (SelectionZone!=null) Renderer.removeRender(SelectionZone!!)
+            if (SelectionZone!=null) Renderer.removeRenderOfType(SelectionZone!!)
             SelectionZone = null
             val res = raycast(level, entity as Player, ClipContext.Fluid.NONE)
             if (res != null) {
@@ -151,7 +151,7 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
 
             }
         } else if (isSelected==false && secondPosition == null && SelectionZone!=null) {
-            Renderer.removeRender(SelectionZone!!)
+            Renderer.removeRenderOfType(SelectionZone!!)
             SelectionZone = null
         }
     }
@@ -166,7 +166,6 @@ class ShipAssemblerItem(properties: Properties): Item(properties) {
         val k = Mth.sin(-f * 0.017453292f)
         val l = i * j
         val n = h * j
-        val d = 5.0
         val vec32 = vec3.add(l.toDouble() * 5.0, k.toDouble() * 5.0, n.toDouble() * 5.0)
         return level.clip(ClipContext(vec3, vec32, ClipContext.Block.OUTLINE, fluidMode, player))
     }
