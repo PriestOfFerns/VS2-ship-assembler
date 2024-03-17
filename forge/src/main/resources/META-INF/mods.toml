@@ -30,6 +30,6 @@ side = "BOTH"
 [[dependencies.vs_ship_assembler]]
 modId = "valkyrienskies"
 mandatory = true
-versionRange = "[${vs2_version},)"
+versionRange = "[2.1.1-beta.1,)"
 ordering = "AFTER"
 side = "BOTH"
